@@ -1,22 +1,22 @@
 <% layout('layouts/boilerplate')%>
 <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
         <% for(let product of user.products) {%>
-            <div class="card mb-4 ms-3 col-6">
-                <div class="card-body row">
+            <div class="card mb-4 ms-3 col-12 pe-0">
+                <div class="card-body row justify-content-around">
                     <div class="col-6">
                         <img src="<%=product.images[0].thumbnail %>" class="img-thumbnail" alt=""> <br>
-                        <a href="/<%=product._id %> " class="card-link" style="font-size: 24px; text-decoration: none;"><%=product.name %></a>
-                        <p class="card-text"><%=product.price %> </p>   
+                        <a href="/<%=product._id %> " class="card-link " style="font-size: 24px; text-decoration: none;"><%=product.name %></a>
+                        <h5 class="card-text mt-2"><%=product.price %> </h5>   
                     </div>
                     <div class="col-6">
                         <div class="card-body">
-                            <p class="card-text"><%=product.description %> </p>   
+                            <h4 class="card-text"><%=product.description %> </h4> 
+                            <form action="/<%=currentUser._id %>/<%=product._id %>/cart?_method=DELETE" method="POST">
+                                <button class="btn btn-sm btn-danger">Remove from Cart</button>
+                            </form>
                         </div>
                     </div>
-                    <form action="/<%=currentUser._id %>/<%=product._id %>/cart?_method=DELETE" method="POST">
-                        <button class="btn btn-sm btn-danger">Remove from Cart</button>
-                    </form>
                 </div>
             </div>
             <% } %>  
