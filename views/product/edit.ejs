@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate')%>
+<div class="container ">
+    <div class="row justify-content-center">
+            <div class="col-8">
+                <form action="/<%=product.id %>?_method=PUT" method="post" class="validated-form" enctype="multipart/form-data" novalidate>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Product name</label>
+                        <input type="text" class="form-control" name="product[name]" id="name" placeholder="" value="<%= product.name %> " required>
+                      </div>
+        
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Product price</label>
+                        <input type="text" class="form-control" name="product[price]" id="price" placeholder="" value="<%= product.price %> " required>
+                      </div>
+                
+                      <div class="mb-3">
+                        <label for="image" class="form-label">Upload Images</label>
+                        <input class="form-control" name="image" type="file" id="image" multiple >
+                      </div>
+                
+                      <div class="mb-3">
+                        <label for="description" class="form-label">Product description</label>
+                        <textarea class="form-control" name="product[description]"  rows="3" required><%= product.description %></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <% product.images.forEach(function(img, i) {  %>
+                            <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+                            <div class="form-check-inline">
+                                <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                            </div>
+                            <label for="image-<%=i%>">Delete?</label>
+                        <% })%>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form>
+            </div>
+    </div>
+</div>

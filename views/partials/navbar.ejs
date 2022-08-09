@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg bg-light mb-4 pt-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">AllStore</a>
+    <a class="navbar-brand" href="/new">Sell</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
+        <% if(!currentUser) {%>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+          <% } else {%>
+            <a href="/<%=currentUser._id %>/cart" class="btn btn-primary position-relative me-4">
+              <svg id="i-cart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M6 6 L30 6 27 19 9 19 M27 23 L10 23 5 2 2 2" />
+                <circle cx="25" cy="27" r="2" />
+                <circle cx="12" cy="27" r="2" />
+            </svg>
+              <% if(currentUser.products.length) {%>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  <%=currentUser.products.length %> 
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+                <% } %>  
+            </button>
+            <a class="nav-link mt-1" href="/logout">Logout</a>
+            <% } %> 
+      </ul>
+      
+      
+    </div>
+    
+  </div>
+</nav>
