@@ -54,13 +54,17 @@ module.exports.createProduct = async (req, res) => {
 }
 
 module.exports.saveProduct = async (req, res, next) => {
-    const { name, description, price } = req.body
+    try {
+        const { name, description, price } = req.body
         const product = new Product(req.body.product)
         product.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
         product.seller = req.user._id
         await product.save()
         req.flash('success', 'Successfully made a new product!');
-        res.redirect(`/${product._id}`)
+        res.redirect(`/product/${product._id}`)
+    } catch (err){
+        next(err)
+    }
 }
 
 module.exports.updateProduct = async (req, res) => {
@@ -78,7 +82,7 @@ module.exports.updateProduct = async (req, res) => {
         await product.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
     }
     req.flash('success', 'Successfully updated product!');
-    res.redirect(`/${product._id}`)
+    res.redirect(`product/${product._id}`)
 }
 
 module.exports.deleteProducts = async (req, res) => {
