@@ -18,8 +18,8 @@
         </li>
         <% if(currentUser && (product.seller.equals(currentUser._id))) {%>
           <li class="list-group-item">
-            <a href="/<%=product._id %>/edit " class="btn btn-warning card-link me-2">Edit</a>
-            <form class="d-inline" action="/<%=product._id%>?_method=DELETE" method="POST">
+            <a href="/product/<%=product._id %>/edit " class="btn btn-warning card-link me-2">Edit</a>
+            <form class="d-inline" action="/product/<%=product._id%>?_method=DELETE" method="POST">
               <button class="btn btn-danger">Delete</button>
             </form>
           </li>

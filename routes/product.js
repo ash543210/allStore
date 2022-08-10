@@ -10,19 +10,19 @@ const { isLoggedIn, isAuthor, validateProduct, validateReview } = require('../mi
 
 
 
-router.route('/')
+router.route('/products')
     .get((products.index))
 
-router.route('/new')
+router.route('/product/new')
     .get(isLoggedIn, (products.createProduct))
     .post(isLoggedIn, upload.array('image'),  (products.saveProduct))
 
-router.route('/:id')
+router.route('/product/:id')
     .get(products.showProduct)
     .put(isLoggedIn, isAuthor, upload.array('image'),  (products.updateProduct))
     .delete(isLoggedIn, isAuthor, (products.deleteProducts))
 
-router.route('/:id/edit')
+router.route('/product/:id/edit')
     .get(isLoggedIn, isAuthor, (products.editProduct))
 
 
