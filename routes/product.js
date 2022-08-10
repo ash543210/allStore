@@ -8,7 +8,8 @@ const upload = multer({ storage });
 const { isLoggedIn, isAuthor, validateProduct, validateReview } = require('../middleware')
 // const catchAsync = require('../utils/catchAsync.js');
 
-
+router.route('/')
+    .get((products.index))
 
 router.route('/products')
     .get((products.index))
