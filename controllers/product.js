@@ -54,17 +54,13 @@ module.exports.createProduct = async (req, res) => {
 }
 
 module.exports.saveProduct = async (req, res, next) => {
-    try {
-        const { name, description, price } = req.body
+    const { name, description, price } = req.body
         const product = new Product(req.body.product)
         product.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
         product.seller = req.user._id
         await product.save()
         req.flash('success', 'Successfully made a new product!');
         res.redirect(`/${product._id}`)
-    } catch (err){
-        next(err)
-    }
 }
 
 module.exports.updateProduct = async (req, res) => {

@@ -6,7 +6,7 @@ const multer = require('multer');
 const { storage } = require('../cloudinary/index');
 const upload = multer({ storage });
 const { isLoggedIn, isAuthor, validateProduct, validateReview } = require('../middleware')
-// const catchAsync = require('../utils/catchAsync.js');
+const catchAsync = require('../utils/catchAsync.js');
 
 router.route('/')
     .get((products.index))
@@ -16,7 +16,7 @@ router.route('/products')
 
 router.route('/product/new')
     .get(isLoggedIn, (products.createProduct))
-    .post(isLoggedIn, upload.array('image'),  (products.saveProduct))
+    .post(isLoggedIn, upload.array('image'),  catchAsync(products.saveProduct))
 
 router.route('/product/:id')
     .get(products.showProduct)
