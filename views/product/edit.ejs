@@ -2,7 +2,7 @@
 <div class="container ">
     <div class="row justify-content-center">
             <div class="col-8">
-                <form action="/<%=product.id %>?_method=PUT" method="post" class="validated-form" enctype="multipart/form-data" novalidate>
+                <form action="/products/<%=product.id %>?_method=PUT" method="post" class="validated-form" enctype="multipart/form-data" novalidate>
                     <div class="mb-3">
                         <label for="name" class="form-label">Product name</label>
                         <input type="text" class="form-control" name="product[name]" id="name" placeholder="" value="<%= product.name %> " required>

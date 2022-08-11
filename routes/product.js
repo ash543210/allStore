@@ -6,25 +6,26 @@ const multer = require('multer');
 const { storage } = require('../cloudinary/index');
 const upload = multer({ storage });
 const { isLoggedIn, isAuthor, validateProduct, validateReview } = require('../middleware')
-// const catchAsync = require('../utils/catchAsync.js');
+const catchAsync = require('../utils/catchAsync');
+// const { validateProduct, validateReview } = require('../utils/ExpressError')
 
 router.route('/')
-    .get((products.index))
+    .get(catchAsync(products.index))
 
 router.route('/products')
-    .get((products.index))
+    .get(catchAsync(products.index))
 
-router.route('/product/new')
-    .get(isLoggedIn, (products.createProduct))
-    .post(isLoggedIn, upload.array('image'),  (products.saveProduct))
+router.route('/products/new')
+    .get(isLoggedIn, catchAsync(products.createProduct))
+    .post(isLoggedIn, upload.array('image'), validateProduct, catchAsync(products.saveProduct))
 
-router.route('/product/:id')
+router.route('/products/:id')
     .get(products.showProduct)
-    .put(isLoggedIn, isAuthor, upload.array('image'),  (products.updateProduct))
-    .delete(isLoggedIn, isAuthor, (products.deleteProducts))
+    .put(isLoggedIn, isAuthor, upload.array('image'), validateProduct, catchAsync(products.updateProduct))
+    .delete(isLoggedIn, isAuthor, catchAsync(products.deleteProducts))
 
-router.route('/product/:id/edit')
-    .get(isLoggedIn, isAuthor, (products.editProduct))
+router.route('/products/:id/edit')
+    .get(isLoggedIn, isAuthor, catchAsync(products.editProduct))
 
 
 

@@ -23,23 +23,35 @@ module.exports.isAuthor = async (req, res, next) => {
     next()
 }
 
-// module.exports.validateProduct = async (req, res, next) => {
-//     const { error } = productSchema.validate(req.body);
-//     // console.log(req.body);
-//     if (error) {
-//         const msg = error.details.map(el => el.message).join(',')
-//         throw new ExpressError(msg, 400)
-//     } else {
-//         next();
-//     }
-// }
+module.exports.validateProduct = async (req, res, next) => {
+    try {
+        const { error } = productSchema.validate(req.body);
+        if (error) {
+            const msg = error.details.map(el => el.message).join(',')
+            const err = new ExpressError(msg, 400)
+            throw err
+        } else {
+            next();
+        }
+    } catch (err) {
+        next (err)
+    }
+    // console.log(req.body);
+    
+}
 
-// module.exports.validateReview = async (req, res, next) => {
-//     const { error } = reviewSchema.validate(req.body);
-//     if (error) {
-//         const msg = error.details.map(el => el.message).join(',')
-//         throw new ExpressError(msg, 400)
-//     } else {
-//         next();
-//     }
-// }
+module.exports.validateReview = async (req, res, next) => {
+    try {
+        const { error } = reviewSchema.validate(req.body);
+        if (error) {
+            const msg = error.details.map(el => el.message).join(',')
+            const err = new ExpressError(msg, 400)
+            throw err
+        } else {
+            next();
+        }
+    } catch (err) {
+        next (err)
+    }
+    
+}

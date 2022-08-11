@@ -16,20 +16,20 @@ module.exports.register = async (req, res) => {
     req.login(registeredUser, err => {
         if (err) return next(err);
         req.flash('success', 'Welcome to AllStore!');
-        res.redirect('/');
+        res.redirect('/products');
     })
 }
 
-module.exports.renderLogin = async (req, res) => {
+module.exports.renderLogin = (req, res) => {
     returnTo = req.session.returnTo;
     // console.log(req.session.returnTo)
     if (req.user) {
-        res.redirect('/')
+        res.redirect('/products')
     }
     res.render('login')
 }
 
-module.exports.login = async (req, res) => {
+module.exports.login = (req, res) => {
     req.flash('success', 'welcome back!');
     const redirect = returnTo || '/'
     res.redirect(redirect)
@@ -39,7 +39,7 @@ module.exports.logout = async (req, res) => {
     req.logout(function (err) {
         if (err) { return next(err); }
         req.flash('success', "Goodbye!");
-        res.redirect('/');
+        res.redirect('/products');
     });
     // req.session.destroy();
     // req.flash('success', "Goodbye!");
