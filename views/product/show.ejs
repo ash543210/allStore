@@ -37,7 +37,7 @@
   </div>
   <div class="mb-3 col-6">
     <% if(currentUser) {%>
-      <form action="/products/<%= product._id%>/reviews" method="post" class="validated-form" novalidate>
+      <form action="/<%= product._id%>/reviews" method="post" class="validated-form" novalidate>
         <fieldset class="starability-basic">
           <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
               aria-label="No rating." />
