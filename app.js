@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const ejs = require("ejs");
 const ejsMate = require("ejs-mate");
@@ -23,9 +27,7 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-const dbUrl =
-  "mongodb+srv://ash54321:fjvIH5itD1e7UT8G@cluster0.si5umyq.mongodb.net/?retryWrites=true&w=majority" ||
-  "mongodb://localhost:27017/all-store";
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/all-store";
 
 mongoose.connect(dbUrl);
 
